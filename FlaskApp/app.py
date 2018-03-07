@@ -106,7 +106,7 @@ def stateyear_info(state, year):
         "MeasurementYear" : []
     }
 
-    base_year = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param1 AND state=:param2 GROUP BY occtitle",{"param1":"5/31/"+year,"param2":state}).fetchall()
+    base_year = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param1 AND state=:param2 GROUP BY occtitle",{"param1":"5/31/"+year_dict[str(year)],"param2":state}).fetchall()
     
     for data in base_year:
         x = {data[0] : data[1]}
