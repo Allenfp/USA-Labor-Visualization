@@ -72,7 +72,7 @@ def state_info(state):
 
     data_list = []
 
-    data16 = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param GROUP BY occtitle",{"param":"5/31/16","param2":state}).fetchall()
+    data16 = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param1 AND state=:param2 GROUP BY occtitle",{"param":"5/31/16","param2":state}).fetchall()
     
     for data in data16:
         x = {data[0] : data[1]}
@@ -106,7 +106,7 @@ def stateyear_info(state, year):
         "MeasurementYear" : []
     }
 
-    base_year = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param1 AND state=:param2 GROUP BY occtitle",{"param1":"5/31/"+year_dict[str(year)],"param2":state}).fetchall()
+    base_year = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param1 AND state=:param2 GROUP BY occtitle",{"param1":"5/31/"+year,"param2":state}).fetchall()
     
     for data in base_year:
         x = {data[0] : data[1]}
