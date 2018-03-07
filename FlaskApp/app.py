@@ -72,7 +72,7 @@ def state_info(state):
 
     data_list = []
 
-    data16 = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param1 AND state=:param2 GROUP BY occtitle",{"param":"5/31/16","param2":state}).fetchall()
+    data16 = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param1 AND state=:param2 GROUP BY occtitle",{"param1":"5/31/16","param2":state}).fetchall()
     
     for data in data16:
         x = {data[0] : data[1]}
