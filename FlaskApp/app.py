@@ -31,29 +31,23 @@ def data():
 @app.route("/national") 
 def national_info():
 
-    data_list = [] 
-    data_dict = {
-        "data07" : [],
-        "data16" : []
-    }
-
+    data_dict7 = {}
+    data_dict16 = {}
+    data_dict = {}
+    
     data07 = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param GROUP BY occtitle",{"param":"5/31/07"}).fetchall()
     
     for data in data07:
-        x = {data[0] : data[1]}
-        data_list.append(x)
-
-    data_dict["data07"] = data_list
-
-    data_list = []
+        data_dict7[data[0]] = int(data[1])
 
     data16 = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param GROUP BY occtitle",{"param":"5/31/16"}).fetchall()
     
     for data in data16:
-        x = {data[0] : data[1]}
-        data_list.append(x)
+        data_dict16[data[0]] = int(data[1])
 
-    data_dict["data16"] = data_list
+    data_dict["2007"] = data_dict7
+    data_dict["2016"] = data_dict16
+    
 
     return jsonify(data_dict)
 
@@ -62,31 +56,25 @@ def national_info():
 @app.route("/state/<state>") 
 def state_info(state):
 
-    data_list = [] 
-    data_dict = {
-        "data07" : [],
-        "data16" : []
-    }
+    data_dict7 = {}
+    data_dict16 = {}
+    data_dict = {}
 
     data07 = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param1 AND state=:param2 GROUP BY occtitle",{"param1":"5/31/07","param2":state}).fetchall()
     
     for data in data07:
-        x = {data[0] : data[1]}
-        data_list.append(x)
-
-    data_dict["data07"] = data_list
-
-    data_list = []
+        data_dict7[data[0]] = int(data[1])
 
     data16 = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param1 AND state=:param2 GROUP BY occtitle",{"param1":"5/31/16","param2":state}).fetchall()
     
     for data in data16:
-        x = {data[0] : data[1]}
-        data_list.append(x)
+        data_dict16[data[0]] = int(data[1])
 
-    data_dict["data16"] = data_list
-
+    data_dict["2007"] = data_dict7
+    data_dict["2016"] = data_dict16
+    
     return jsonify(data_dict)
+
 
 # Single State Single Year Information ##############################################################################
 
@@ -106,30 +94,23 @@ def stateyear_info(state, year):
 
     }
 
-    data_list = [] 
-    data_dict = {
-        "BaseYear" : [],
-        "MeasurementYear" : []
-    }
+    data_dict = {}
+    BaseYear_dict= {}
+    MeasurementYear_dict = {}
 
     base_year = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param1 AND state=:param2 GROUP BY occtitle",{"param1":"5/31/"+year_dict[str(year)],"param2":state}).fetchall()
     
     for data in base_year:
-        x = {data[0] : data[1]}
-        data_list.append(x)
-
-    data_dict["BaseYear"] = data_list
-
-    data_list = []
+        BaseYear_dict[data[0]] = int(data[1])
 
     measurement_year = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param1 AND state=:param2 GROUP BY occtitle",{"param1":"5/31/"+year,"param2":state}).fetchall()
     
     for data in measurement_year:
-        x = {data[0] : data[1]}
-        data_list.append(x)
+        MeasurementYear_dict[data[0]] = int(data[1])
 
-    data_dict["MeasurementYear"] = data_list
-
+    data_dict["baseYear"] = BaseYear_dict
+    data_dict["measurementYear"] = MeasurementYear_dict
+    
     return jsonify(data_dict)
 
 if __name__ == "__main__":
