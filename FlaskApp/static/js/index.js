@@ -26,6 +26,43 @@ function changeNationalData() {
 
     var nationalUrl = "/national"
 
+    Plotly.d3.json(nationalUrl , function(error, nationalData) {
+        if (error) {
+            return console.warn(error);
+        }
+        //create arrays for percentage calculation (dont worry, the JSON is presorted)
+        var arr16 = Object.keys(nationalData["2016"]).map(function(key) { return nationalData["2016"][key]})
+        var arr07 = Object.keys(nationalData["2007"]).map(function(key) { return nationalData["2007"][key]})
+
+        //create an array of the keys for use later.
+        var keyArr = Object.keys(nationalData["2016"])
+        //do the percentage calculation
+        var x = []
+        var y = []
+        for (i = 0; i < arr16.length; i++) { 
+            y.push(((arr16[i]/arr07[i])-1) * 100)
+            x.push(keyArr[i])
+        }
+        var graphData = [
+            {
+              x: x,
+              y: y,
+              type: 'bar'
+            }
+          ];
+          var layout = {
+            title: "Percentage Change for 2007-2016 for United States",
+            xaxis: {
+                title: "Occupation"
+            },
+            yaxis: {
+                title: "Percentage Change"
+            }
+        };
+        Plotly.newPlot('national_graph', graphData, layout);
+    });
+
+
     d3.json(nationalUrl, function(error, nationalData) {
         //find largest and smallest sectors
         var l_sec = Object.keys(nationalData["2016"]).reduce((a, b) => nationalData["2016"][a] > nationalData["2016"][b] ? a : b);
@@ -142,8 +179,45 @@ function changeStateData(state) {
 function changeYearData(year) {
 
     d3.select('#year_facts').selectAll('li').remove();
+    stateYearUrl = stateUrl+stateValue+"/year/"+year
 
-    d3.json(stateUrl+stateValue+"/year/"+year, function(error, yearData) {
+    Plotly.d3.json(stateYearUrl, function(error, yearData) {
+        if (error) {
+            return console.warn(error);
+        }
+        //create arrays for percentage calculation (dont worry, the JSON is presorted)
+        var arr16 = Object.keys(yearData["measurementYear"]).map(function(key) { return yearData["measurementYear"][key]})
+        var arr07 = Object.keys(yearData["baseYear"]).map(function(key) { return yearData["baseYear"][key]})
+
+        //create an array of the keys for use later.
+        var keyArr = Object.keys(yearData["measurementYear"])
+        //do the percentage calculation
+        var x = []
+        var y = []
+        for (i = 0; i < arr16.length; i++) { 
+            y.push(((arr16[i]/arr07[i])-1) * 100)
+            x.push(keyArr[i])
+        }
+        var graphData = [
+            {
+              x: x,
+              y: y,
+              type: 'bar'
+            }
+          ];
+          var layout = {
+            title: "Percentage Change from previous year for 20" + year + " in " + stateValue,
+            xaxis: {
+                title: "Occupation"
+            },
+            yaxis: {
+                title: "Percentage Change"
+            }
+        };
+        Plotly.newPlot('state_year_graph', graphData, layout);
+    });
+
+    d3.json(stateYearUrl, function(error, yearData) {
         //find largest and smallest sectors
         var l_sec = Object.keys(yearData["measurementYear"]).reduce((a, b) => yearData["measurementYear"][a] > yearData["measurementYear"][b] ? a : b);
         var s_sec = Object.keys(yearData["measurementYear"]).reduce((a, b) => yearData["measurementYear"][a] < yearData["measurementYear"][b] ? a : b);
