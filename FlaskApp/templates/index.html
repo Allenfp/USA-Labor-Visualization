@@ -14,6 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -66,6 +67,8 @@
                 <div class="col-md-9">
                     <h5>SLick Carto Map</h5>
                     <a href="https://placeholder.com"><img src="http://via.placeholder.com/800x400"></a>
+                    <h5>National Map</h5>
+                    <div id="national_graph"></div>
                 </div>
             </div>
             <!-- End Top Section -->
@@ -94,27 +97,13 @@
 
                                     </ul>
                                 </div>
-                              </div>
+                        </div>
                 </div>
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-12">
                             <h6>Cool Graph</h6>
-                            <a href="https://placeholder.com"><img src="http://via.placeholder.com/730x200"></a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                        <h6>Cool Plot</h6>
-                        <a href="https://placeholder.com"><img src="http://via.placeholder.com/200x200"></a>
-                        </div>
-                        <div class="col-md-4">
-                        <h6>Cool Bar Chart</h6>
-                        <a href="https://placeholder.com"><img src="http://via.placeholder.com/200x200"></a>
-                        </div>
-                         <div class="col-md-4">
-                        <h6>Cool Line Graph</h6>
-                        <a href="https://placeholder.com"><img src="http://via.placeholder.com/200x200"></a>
+                            <div id="state_graph"></div>
                         </div>
                     </div>
                 </div>
@@ -140,26 +129,13 @@
                         <div class="card-header">Summary Information</div>
                         <div class="card-body">
                             <ul id="year_facts">
-
                             </ul>
                         </div>
                       </div>
                      </div>
                 <div class="col-md-9">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h6>Another Viz</h6>
-                            <a href="https://placeholder.com"><img src="http://via.placeholder.com/400x200"></a>
-                            <h6>Col 1 2nd Viz</h6>
-                            <a href="https://placeholder.com"><img src="http://via.placeholder.com/400x200"></a>
-                        </div>
-                        <div class="col-md-6">
-                            <h6>Second Viz</h6>
-                            <a href="https://placeholder.com"><img src="http://via.placeholder.com/400x200"></a>
-                            <h6>Col 2 2nd Viz</h6>
-                            <a href="https://placeholder.com"><img src="http://via.placeholder.com/400x200"></a>
-                        </div>
-                    </div>
+                    <h6>Per State Per Year Data</h6>
+                    <div id="state_year_graph"></div>                
                 </div>
             </div>
         </div>
@@ -169,6 +145,7 @@
                 <span class="text-muted text-center">Made by Allen, Gar, Apoorva, Rebecca, and Tully.</span>
             </div>
         </footer>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script src="{{url_for('static', filename='js/index.js')}}"></script>
     </body>
 </html>
