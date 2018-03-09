@@ -3,8 +3,6 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 
 from flask import Flask, render_template, jsonify
-import json
-from datetime import datetime
 
 engine = create_engine("sqlite:///oes.db")
 
@@ -36,7 +34,7 @@ def national_info():
     data_dict7 = {}
     data_dict16 = {}
     data_dict = {}
-
+    
     data07 = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param GROUP BY occtitle",{"param":"5/31/07"}).fetchall()
     
     for data in data07:
@@ -57,17 +55,25 @@ def national_info():
 
 @app.route("/state/<state>") 
 def state_info(state):
-    query_result = (session.query(Data.occtitle, Data.totalemp, Data.year).filter(Data.state == state).all())
-    mydata = []
-    for row in query_result:
-        date_object = datetime.strptime(row.year, '%m/%d/%y')
-        year = int(date_object.strftime('%Y'))
-        mydata.append({
-            "year": year,
-            "occupation": row.occtitle,
-            "totalemp": row.totalemp 
-        })
-    return json.dumps(mydata, separators=(',',':'))
+
+    data_dict7 = {}
+    data_dict16 = {}
+    data_dict = {}
+
+    data07 = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param1 AND state=:param2 GROUP BY occtitle",{"param1":"5/31/07","param2":state}).fetchall()
+    
+    for data in data07:
+        data_dict7[data[0]] = int(data[1])
+
+    data16 = session.execute("SELECT occtitle, SUM(REPLACE(totalemp, ',', '')) from Data WHERE year=:param1 AND state=:param2 GROUP BY occtitle",{"param1":"5/31/16","param2":state}).fetchall()
+    
+    for data in data16:
+        data_dict16[data[0]] = int(data[1])
+
+    data_dict["2007"] = data_dict7
+    data_dict["2016"] = data_dict16
+    
+    return jsonify(data_dict)
 
 
 # Single State Single Year Information ##############################################################################

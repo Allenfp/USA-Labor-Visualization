@@ -23,11 +23,11 @@
             </button> 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                     <a class="nav-link" href="page.html">Blank Page</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
-                    <a class="nav-link" href="/data">Data</a>
+                    <a class="nav-link" href="/data">Data Table</a>
                     </li>
                   </ul>
                   <!-- <form class="form-inline my-2 my-lg-0">
@@ -52,17 +52,14 @@
                 <div class="col-md-3">
                     <div class="card bg-light mb-3" style="max-width: 18rem;">
                       <!-- <img class="card-img-top" src="holder.js/100px180/" alt=""> -->
-                      <div class="card-header">Quick Facts 2017</div>
+                      <div class="card-header">Fact Summary</div>
                       <div class="card-body">
-                        <h6 class="card-subtitle text-muted">Largest Sector:</h6>
-                        <p class="card-text">%%SectorName%% | %%jobsNumber%%</p>
-                        <h6 class="card-subtitle text-muted">Most Growth:</h6>
-                        <p class="card-text">%% SectorName%% | %%sectorTotal%%</p>
-                        <h6 class="card-subtitle text-muted">Smallest Sector:</h6>
-                        <p class="card-text">%%SectorName%% | %%jobsNumber%%</p>
-                        <h6 class="card-subtitle text-muted">Greatest Decline:</h6>
-                        <p class="card-text">%%SectorName%% | %%jobsNumber%%</p>
-                      </div>
+                    
+                        <ul id="nation_facts">
+
+                        </ul>
+
+                    </div>
                     </div>
                 </div>
                 <!-- End Facts Card Column-->
@@ -76,7 +73,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <hr>
-                    <h3>State Snapshots</h3>
+                    <h3>2007-2016 by State</h3>
                 </div>
             </div>
             <div class="row">
@@ -125,22 +122,29 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <hr>
-                    <h3>Overview By Year</h3>
+                    <h3>Overview of State by Year</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3">
                     <div class="input-group">
-                        <select class="custom-select" id="inputGroupSelect03">
+                        <select class="custom-select" id="inputGroupSelect03" onchange="changeYearData(this.value)">
                             <option selected>Select a Year...</option>
                             </select>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">Select</button>
                             </div>
                     </div>
-                    <h6>Top 10 Growth Sectors</h6>
-                    <a href="https://placeholder.com"><img src="http://via.placeholder.com/250x500"></a>
-                </div>
+                    <div class="card bg-light mb-3" style="max-width: 18rem;">
+                        <!-- <img class="card-img-top" src="holder.js/100px180/" alt=""> -->
+                        <div class="card-header">Summary Information</div>
+                        <div class="card-body">
+                            <ul id="year_facts">
+
+                            </ul>
+                        </div>
+                      </div>
+                     </div>
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-6">
@@ -162,7 +166,7 @@
         <!-- End Container -->
         <footer class="footer">
             <div class="container">
-                <span class="text-muted text-center">Made by Allen, Gar, Rebecca, and Tully.</span>
+                <span class="text-muted text-center">Made by Allen, Gar, Apoorva, Rebecca, and Tully.</span>
             </div>
         </footer>
         <script src="{{url_for('static', filename='js/index.js')}}"></script>
