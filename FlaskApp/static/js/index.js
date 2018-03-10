@@ -23,6 +23,7 @@ for(var i = 0; i < years.length; i++) {
 
 //Required Globals
 var stateValue = ""
+var yearValue = ""
 var stateUrl = "/state/"
 
 ////////// National Data Stuff ///////////////////////////////// 
@@ -224,6 +225,12 @@ function changeStateData(state) {
 
         })
 
+    // If year value is set, call changeYearData to update year data
+    if (yearValue != "") {
+        changeYearData(yearValue)
+    }
+
+
 }
 
 ////////// By State By Year Data Box Stuff ///////////////////////////////// 
@@ -232,6 +239,8 @@ function changeYearData(year) {
 
     d3.select('#year_facts').selectAll('li').remove();
     stateYearUrl = stateUrl+stateValue+"/year/"+year
+
+    yearValue = year
 
     Plotly.d3.json(stateYearUrl, function(error, yearData) {
         if (error) {
