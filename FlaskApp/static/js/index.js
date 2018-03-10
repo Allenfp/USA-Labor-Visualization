@@ -1,6 +1,9 @@
+//Drop Down Variables
 var states = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Palau','Pennsylvania','Puerto Rico','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];    
 var years = ['08', '09', '10', '11', '12', '13', '14', '15', '16'];
 
+
+// Event Listener for State
 var sel = document.getElementById('inputGroupSelect04');
 for(var i = 0; i < states.length; i++) {
     var opt = document.createElement('option');
@@ -9,6 +12,7 @@ for(var i = 0; i < states.length; i++) {
     sel.appendChild(opt);
 }
 
+//Event Listener for State/Year
 var sel2 = document.getElementById('inputGroupSelect03');
 for(var i = 0; i < years.length; i++) {
     var opt2 = document.createElement('option');
@@ -17,14 +21,16 @@ for(var i = 0; i < years.length; i++) {
     sel2.appendChild(opt2);
 }
 
+//Required Globals
 var stateValue = ""
 var stateUrl = "/state/"
 
-////////// National Data Box Stuff ///////////////////////////////// 
+////////// National Data Stuff ///////////////////////////////// 
 
 function changeNationalData() {
 
     var nationalUrl = "/national"
+
 
     Plotly.d3.json(nationalUrl , function(error, nationalData) {
         if (error) {
@@ -52,6 +58,15 @@ function changeNationalData() {
           ];
           var layout = {
             title: "Percentage Change for 2007-2016 for United States",
+            autosize: false,
+            width: 1200,
+            height: 700,
+            margin: {
+              l: 50,
+              r: 100,
+              b: 230,
+              t: 30,
+              pad: 4},
             xaxis: {
                 title: "Occupation"
             },
@@ -72,39 +87,50 @@ function changeNationalData() {
         var arr07 = Object.keys(nationalData["2007"]).map(function(key) { return nationalData["2007"][key]})
         //create an array of the keys for use later.
         var keyArr = Object.keys(nationalData["2016"])
+        
         //do the percentage calculation
-        var x = []
+        var x = [];
+        var y = [];
+        var z = [];
+
         for (i = 0; i < arr16.length; i++) { 
             x.push((arr16[i]/arr07[i])-1)
         }
+        for (i = 0; i < arr16.length; i++) { 
+            y.push(arr16[i]-arr07[i])
+        }
+        for (i = 0; i < arr16.length; i++) { 
+            z.push(arr07[i])
+        }
+
         //find the strongest and weakest growth and put that into an array.
-        var s_growth = x.reduce( (a,b,i) => a[0] < b ? [b,keyArr[i]] : a, [Number.MIN_VALUE,-1])
-        var w_growth = x.reduce( (a,b,i) => a[0] > b ? [b,keyArr[i]] : a, [Number.MIN_VALUE,-1])
+        var s_growth = x.reduce( (a,b,i) => a[0] < b ? [b,keyArr[i]] : a, [Number.MIN_VALUE,-1]);
+        var w_growth = x.reduce( (a,b,i) => a[0] > b ? [b,keyArr[i]] : a, [Number.MIN_VALUE,-1]);
+        var totalChange = y.reduce( (a,b)  => a + b);
+        var totalBase = z.reduce( (a,b) => a + b);
 
         d3.select('#nation_facts')
         .append('li').attr('id', 'largestSector').text('Largest Sector: ' + l_sec + ' with ' + nationalData["2016"][l_sec] + ' jobs.')
         .append('li').attr('id', 'strongestGrowth').text('Strongest Growth: ' + s_growth[1] + ' with a change of ' + Math.round(s_growth[0]*1000)/10 + "%.")
         .append('li').attr('id', 'smallestSector').text('Smallest Sector: ' + s_sec + ' with ' + nationalData["2016"][s_sec] + ' jobs.')
         .append('li').attr('id', 'weakestGrowth').text('Weakest Growth/Decline: ' + w_growth[1] + ' with a change of ' + Math.round(w_growth[0]*1000)/10 + "%.");
-        });
+        
+        d3.select('#nation_percent')
+        .append('li').attr('id', 'totalPercent').text( totalChange/totalBase + "%")
+
+        console.log(totalChange/totalBase)
+
+    });
 };
 
 changeNationalData();
 
+////////// By State Data Stuff ///////////////////////////////// 
+
+
 function changeStateData(state) {
 
     stateValue = state
-
-////////// Plotly Graph Related Stuff Goes Here /////////// 
-
-// Blah Blah Blah
-// Blah Blah Blah
-
-
-
-
-
-////////// By State Data Box Stuff ///////////////////////////////// 
 
     d3.select('#state_facts').selectAll('li').remove();
 
@@ -134,6 +160,15 @@ function changeStateData(state) {
           ];
           var layout = {
             title: "Percentage Change for 2007-2016 for " + state,
+            autosize: false,
+            width: 1200,
+            height: 700,
+            margin: {
+              l: 50,
+              r: 100,
+              b: 230,
+              t: 30,
+              pad: 4},
             xaxis: {
                 title: "Occupation"
             },
@@ -154,13 +189,26 @@ function changeStateData(state) {
         //create an array of the keys for use later.
         var keyArr = Object.keys(stateData["2016"])
         //do the percentage calculation
-        var x = []
+
+        var x = [];
+        var y = [];
+        var z = [];
+
         for (i = 0; i < arr16.length; i++) { 
             x.push((arr16[i]/arr07[i])-1)
         }
+        for (i = 0; i < arr16.length; i++) { 
+            y.push(arr16[i]-arr07[i])
+        }
+        for (i = 0; i < arr16.length; i++) { 
+            z.push(arr07[i])
+        }
+
         //find the strongest and weakest growth and put that into an array.
         var s_growth = x.reduce( (a,b,i) => a[0] < b ? [b, keyArr[i]] : a, [Number.MIN_VALUE,-1])
         var w_growth = x.reduce( (a,b,i) => a[0] > b ? [b, keyArr[i]] : a, [Number.MIN_VALUE,-1])
+        var totalChange = y.reduce( (a,b)  => a + b);
+        var totalBase = z.reduce( (a,b) => a + b);
 
         
         d3.select('#state_facts')
@@ -169,6 +217,10 @@ function changeStateData(state) {
         .append('li').attr('id', 'smallestSector').text('Smallest Sector: ' + s_sec + ' with ' + stateData["2016"][s_sec] + ' jobs.')
         .append('li').attr('id', 'weakestGrowth').text('Weakest Growth/Decline: ' + w_growth[1] + ' with a change of ' + Math.round(w_growth[0]*1000)/10 + "%.");
 
+        d3.select('#state_percent')
+        .append('li').attr('id', 'totalPercent').text( totalChange/totalBase + "%")
+
+        console.log(totalChange/totalBase)
 
         })
 
@@ -207,6 +259,15 @@ function changeYearData(year) {
           ];
           var layout = {
             title: "Percentage Change from previous year for 20" + year + " in " + stateValue,
+            autosize: false,
+            width: 1200,
+            height: 700,
+            margin: {
+              l: 50,
+              r: 100,
+              b: 230,
+              t: 30,
+              pad: 4},
             xaxis: {
                 title: "Occupation"
             },
@@ -228,6 +289,9 @@ function changeYearData(year) {
         var keyArr = Object.keys(yearData["measurementYear"])
         //do the percentage calculation
         var x = []
+        var y = []
+        var z = []
+        
         for (i = 0; i < arrMY.length; i++) { 
             x.push((arrMY[i]/arrBY[i])-1)
         }
@@ -235,11 +299,22 @@ function changeYearData(year) {
         for (i = 0; i < arrMY.length; i++) { 
             y.push((arrMY[i] - arrBY[i]))
         }
+        for (i = 0; i < arrMY.length; i++) { 
+            y.push(arrMY[i]-arrBY[i])
+        }
+        for (i = 0; i < arrMY.length; i++) { 
+            z.push(arrBY[i])
+        }
+
+
         //find the strongest and weakest growth and put that into an array.
         var s_growth = x.reduce( (a,b,i) => a[0] < b ? [b, keyArr[i]] : a, [Number.MIN_VALUE,-1])
         var w_growth = x.reduce( (a,b,i) => a[0] > b ? [b, keyArr[i]] : a, [Number.MIN_VALUE,-1])
         var s_nominal_growth = y.reduce( (a,b,i) => a[0] < b ? [b, keyArr[i]] : a, [Number.MIN_VALUE,-10000000000000])
         var w_nominal_growth = y.reduce( (a,b,i) => a[0] > b ? [b, keyArr[i]] : a, [Number.MIN_VALUE,-10000000000000])
+
+        var totalChange = y.reduce( (a,b)  => a + b);
+        var totalBase = z.reduce( (a,b) => a + b);
 
         d3.select('#year_facts')
         .append('li').attr('id', 'largestSector').text('Strongest Nominal Growth: ' + s_nominal_growth[1] + ' with ' + s_nominal_growth[0] + ' jobs.')
@@ -247,8 +322,10 @@ function changeYearData(year) {
         .append('li').attr('id', 'smallestSector').text('Weakest Nominal Growth/Decline: ' + w_nominal_growth[1] + ' with ' + w_nominal_growth[0] + ' jobs.')
         .append('li').attr('id', 'weakestGrowth').text('Weakest Percentage: ' + w_growth[1] + ' with a change of ' + Math.round(w_growth[0]*1000)/10 + "%.");
 
-        console.log(s_nominal_growth)
-        console.log(w_nominal_growth)
+        d3.select('#year_percent')
+        .append('li').attr('id', 'totalPercent').text( totalChange/totalBase + "%")
+
+        console.log(totalChange/totalBase)
         })
 
     }
