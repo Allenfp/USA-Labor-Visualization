@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h2>The Changing Nature of Work in the USA</h2>
-                    <h4>Employment numbers by sector and state 2007-2017</h4>
+                    <h4>Employment numbers by sector and state 2007-2016</h4>
                     <hr>
                 </div>
             </div>
@@ -65,11 +65,10 @@
                 </div>
                 <!-- End Facts Card Column-->
                 <div class="col-md-9">
-                    <h5>SLick Carto Map</h5>
-                    <a href="https://placeholder.com"><img src="http://via.placeholder.com/800x400"></a>
-                    <h5>National Map</h5>
-                    <div id="national_graph"></div>
+                    <iframe width="100%" height="600" frameborder="0" src="https://allenfp.carto.com/builder/138f8adc-f46b-45af-b54b-4d6a81a0dc8e/embed" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+
                 </div>
+                <div id="national_graph"></div>
             </div>
             <!-- End Top Section -->
             <!-- State Section -->
@@ -80,7 +79,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-12">
                         <div class="input-group">
                             <select class="custom-select" id="inputGroupSelect04" onchange="changeStateData(this.value)">
                                 <option selected>Select a State...</option>
@@ -89,7 +88,7 @@
                                 <button class="btn btn-outline-secondary" type="button">Select</button>
                             </div>
                         </div>
-                        <div class="card bg-light mb-3" style="max-width: 18rem;">
+                        <div class="card bg-light mb-12">
                                 <!-- <img class="card-img-top" src="holder.js/100px180/" alt=""> -->
                                 <div class="card-header">Summary Information</div>
                                 <div class="card-body">
@@ -99,7 +98,8 @@
                                 </div>
                         </div>
                 </div>
-                <div class="col-md-9">
+            </div>
+                <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
                             <h6>Cool Graph</h6>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+
             <div class="row">
                 <div class="col-md-12 text-center">
                     <hr>
@@ -115,7 +115,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-12">
                     <div class="input-group">
                         <select class="custom-select" id="inputGroupSelect03" onchange="changeYearData(this.value)">
                             <option selected>Select a Year...</option>
@@ -124,7 +124,7 @@
                                 <button class="btn btn-outline-secondary" type="button">Select</button>
                             </div>
                     </div>
-                    <div class="card bg-light mb-3" style="max-width: 18rem;">
+                    <div class="card bg-light mb-12">
                         <!-- <img class="card-img-top" src="holder.js/100px180/" alt=""> -->
                         <div class="card-header">Summary Information</div>
                         <div class="card-body">
@@ -133,11 +133,13 @@
                         </div>
                       </div>
                      </div>
-                <div class="col-md-9">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
                     <h6>Per State Per Year Data</h6>
                     <div id="state_year_graph"></div>                
                 </div>
-            </div>
+
         </div>
         <!-- End Container -->
         <footer class="footer">

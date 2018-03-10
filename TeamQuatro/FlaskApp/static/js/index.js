@@ -114,10 +114,11 @@ function changeNationalData() {
         .append('li').attr('id', 'largestSector').text('Largest Sector: ' + l_sec + ' with ' + nationalData["2016"][l_sec] + ' jobs.')
         .append('li').attr('id', 'strongestGrowth').text('Strongest Growth: ' + s_growth[1] + ' with a change of ' + Math.round(s_growth[0]*1000)/10 + "%.")
         .append('li').attr('id', 'smallestSector').text('Smallest Sector: ' + s_sec + ' with ' + nationalData["2016"][s_sec] + ' jobs.')
-        .append('li').attr('id', 'weakestGrowth').text('Weakest Growth/Decline: ' + w_growth[1] + ' with a change of ' + Math.round(w_growth[0]*1000)/10 + "%.");
-        
-        d3.select('#nation_percent')
-        .append('li').attr('id', 'totalPercent').text( totalChange/totalBase + "%")
+        .append('li').attr('id', 'weakestGrowth').text('Weakest Growth/Decline: ' + w_growth[1] + ' with a change of ' + Math.round(w_growth[0]*1000)/10 + "%.")
+        .append('li').attr('id', 'totalPercent').text("National Total: " + Math.round((totalChange/totalBase)*1000)/10 + "%")
+
+        // d3.select('#nation_percent')
+        // .append('li').attr('id', 'totalPercent').text("National Total: " totalChange/totalBase + "%")
 
         console.log(totalChange/totalBase)
 
@@ -216,10 +217,11 @@ function changeStateData(state) {
         .append('li').attr('id', 'largestSector').text('Largest Sector: ' + l_sec + ' with ' + stateData["2016"][l_sec] + ' jobs.')
         .append('li').attr('id', 'strongestGrowth').text('Strongest Growth: ' + s_growth[1] + ' with a change of ' + Math.round(s_growth[0]*1000)/10 + "%.")
         .append('li').attr('id', 'smallestSector').text('Smallest Sector: ' + s_sec + ' with ' + stateData["2016"][s_sec] + ' jobs.')
-        .append('li').attr('id', 'weakestGrowth').text('Weakest Growth/Decline: ' + w_growth[1] + ' with a change of ' + Math.round(w_growth[0]*1000)/10 + "%.");
+        .append('li').attr('id', 'weakestGrowth').text('Weakest Growth/Decline: ' + w_growth[1] + ' with a change of ' + Math.round(w_growth[0]*1000)/10 + "%.")
+        .append('li').attr('id', 'totalPercent').text('Total State Change: ' + Math.round((totalChange/totalBase)*1000)/10 + "%")
 
-        d3.select('#state_percent')
-        .append('li').attr('id', 'totalPercent').text( totalChange/totalBase + "%")
+        // d3.select('#state_percent')
+        // .append('li').attr('id', 'totalPercent').text( totalChange/totalBase + "%")
 
         console.log(totalChange/totalBase)
 
@@ -329,10 +331,11 @@ function changeYearData(year) {
         .append('li').attr('id', 'largestSector').text('Strongest Nominal Growth: ' + s_nominal_growth[1] + ' with ' + s_nominal_growth[0] + ' jobs.')
         .append('li').attr('id', 'strongestGrowth').text('Strongest Percentage: ' + s_growth[1] + ' with a change of ' + Math.round(s_growth[0]*1000)/10 + "%.")
         .append('li').attr('id', 'smallestSector').text('Weakest Nominal Growth/Decline: ' + w_nominal_growth[1] + ' with ' + w_nominal_growth[0] + ' jobs.')
-        .append('li').attr('id', 'weakestGrowth').text('Weakest Percentage: ' + w_growth[1] + ' with a change of ' + Math.round(w_growth[0]*1000)/10 + "%.");
+        .append('li').attr('id', 'weakestGrowth').text('Weakest Percentage: ' + w_growth[1] + ' with a change of ' + Math.round(w_growth[0]*1000)/10 + "%.")
+        .append('li').attr('id', 'totalPercent').text('Total State/Year Change: ' + Math.round((totalChange/totalBase)*1000)/10 + "%")
 
-        d3.select('#year_percent')
-        .append('li').attr('id', 'totalPercent').text( totalChange/totalBase + "%")
+        // d3.select('#year_percent')
+        // .append('li').attr('id', 'totalPercent').text( totalChange/totalBase + "%")
 
         console.log(totalChange/totalBase)
         })
