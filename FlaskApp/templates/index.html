@@ -7,15 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="static/css/style.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.js"></script>
-    <script src="plotly-latest.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -66,16 +65,11 @@
                 </div>
                 <!-- End Facts Card Column-->
                 <div class="col-md-9">
-                    <iframe width="100%" height="520" frameborder="0" src="https://allenfp.carto.com/builder/138f8adc-f46b-45af-b54b-4d6a81a0dc8e/embed" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+                    <h5>SLick Carto Map</h5>
+                    <a href="https://placeholder.com"><img src="http://via.placeholder.com/800x400"></a>
+                    <h5>National Map</h5>
+                    <div id="national_graph"></div>
                 </div>
-            </div>
-            <div class="row">
-                    <div id="national_graph">
-                    </div>
-
-                    <div class="col-md-12">
-                        <a href="https://placeholder.com"><img src="http://via.placeholder.com/1140x400"></a>
-                    </div>
             </div>
             <!-- End Top Section -->
             <!-- State Section -->
@@ -87,47 +81,31 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                        <h6>Select a State</h6>
                         <div class="input-group">
                             <select class="custom-select" id="inputGroupSelect04" onchange="changeStateData(this.value)">
                                 <option selected>Select a State...</option>
                             </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button">Select</button>
+                            </div>
                         </div>
-                        <div class="card bg-light mb-3">
+                        <div class="card bg-light mb-3" style="max-width: 18rem;">
+                                <!-- <img class="card-img-top" src="holder.js/100px180/" alt=""> -->
                                 <div class="card-header">Summary Information</div>
                                 <div class="card-body">
                                     <ul id="state_facts">
 
                                     </ul>
                                 </div>
-                              </div>
+                        </div>
                 </div>
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-12">
                             <h6>Cool Graph</h6>
-                            <a href="https://placeholder.com"><img src="http://via.placeholder.com/730x200"></a>
+                            <div id="state_graph"></div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                        <h6>Cool Plot</h6>
-                        <a href="https://placeholder.com"><img src="http://via.placeholder.com/200x200"></a>
-                        </div>
-                        <div class="col-md-4">
-                        <h6>Cool Bar Chart</h6>
-                        <a href="https://placeholder.com"><img src="http://via.placeholder.com/200x200"></a>
-                        </div>
-                         <div class="col-md-4">
-                        <h6>Cool Line Graph</h6>
-                        <a href="https://placeholder.com"><img src="http://via.placeholder.com/200x200"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                        <div class="col-md-12">
-                            <a href="https://placeholder.com"><img src="http://via.placeholder.com/1140x400"></a>
-                        </div>
                 </div>
             </div>
             <div class="row">
@@ -138,50 +116,36 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <h6>Select a Year</h6>
-                    <em>(State must be selected)</em>
                     <div class="input-group">
                         <select class="custom-select" id="inputGroupSelect03" onchange="changeYearData(this.value)">
                             <option selected>Select a Year...</option>
                             </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button">Select</button>
+                            </div>
                     </div>
-                    <div class="card bg-light mb-3">
+                    <div class="card bg-light mb-3" style="max-width: 18rem;">
+                        <!-- <img class="card-img-top" src="holder.js/100px180/" alt=""> -->
                         <div class="card-header">Summary Information</div>
                         <div class="card-body">
                             <ul id="year_facts">
-
                             </ul>
                         </div>
                       </div>
                      </div>
                 <div class="col-md-9">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h6>Another Viz</h6>
-                            <a href="https://placeholder.com"><img src="http://via.placeholder.com/400x200"></a>
-                            <h6>Col 1 2nd Viz</h6>
-                            <a href="https://placeholder.com"><img src="http://via.placeholder.com/400x200"></a>
-                        </div>
-                        <div class="col-md-6">
-                            <h6>Second Viz</h6>
-                            <a href="https://placeholder.com"><img src="http://via.placeholder.com/400x200"></a>
-                            <h6>Col 2 2nd Viz</h6>
-                            <a href="https://placeholder.com"><img src="http://via.placeholder.com/400x200"></a>
-                        </div>
-                    </div>
+                    <h6>Per State Per Year Data</h6>
+                    <div id="state_year_graph"></div>                
                 </div>
             </div>
         </div>
         <!-- End Container -->
         <footer class="footer">
-            <div class="container text-center">
-                <div class="row">
-                    <div class="col-lg-12">
-                    <span class="text-muted text-center">Made by TeamQuatro: Allen, Apoorva, Gar, Rebecca, and Tully.</span>
-                    </div>
-                </div>
+            <div class="container">
+                <span class="text-muted text-center">Made by Allen, Gar, Apoorva, Rebecca, and Tully.</span>
             </div>
         </footer>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script src="{{url_for('static', filename='js/index.js')}}"></script>
     </body>
 </html>
