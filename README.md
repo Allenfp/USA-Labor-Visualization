@@ -6,7 +6,7 @@ Technologies used: Python 3, Flask, SQLAlchemy, JavaScript, Plotly.js, jQuery, B
 
 Known issues: 1) CartoDB Map no longer displays (free trial expired). 2) jQuery pagination numbering format not playing nice with Flask. 
 
-[Click here to see a video demonstration (YouTube!)](https://youtu.be/cPegAxDU1sk "YouTube!")
+[<=== Click here to see a video demonstration (YouTube!) ===>](https://youtu.be/cPegAxDU1sk "YouTube!")
 
 
 ![alt text](https://github.com/Allenfp/USA-Labor-Visualization/blob/master/country_map.png)
