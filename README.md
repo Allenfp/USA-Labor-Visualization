@@ -1,7 +1,8 @@
 # Employment Visualization
 
 Visualizing USA employment data by state, sector, and year, and in a single easily navigated web interface.
-Known issue: CartoDB Map no longer displays (free trial expired).
+
+Known issues: 1) CartoDB Map no longer displays (free trial expired). 2) Jquery pagination numbering format not playing nice with Flask. 
 
 Technologies used: Python 3, Flask, SQLAlchemy, JavaScript, Plotly.js, Bootstrap, HTML5, CSS.
 
