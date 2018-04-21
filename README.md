@@ -15,3 +15,5 @@ Technologies used: Python 3, Flask, SQLAlchemy, JavaScript, Plotly.js, Bootstrap
 ![alt text](https://github.com/Allenfp/USA-Labor-Visualization/blob/master/by_state_graph.png)
 
 ![alt text](https://github.com/Allenfp/USA-Labor-Visualization/blob/master/by_state_by_year.png)
+
+![alt text](https://github.com/Allenfp/USA-Labor-Visualization/blob/master/data_table.png)
